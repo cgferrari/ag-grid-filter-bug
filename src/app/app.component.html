@@ -1,0 +1,62 @@
+<h1>AG-Grid Filter Option Display Bug</h1>
+<div style="display: flex; flex-direction: row">
+  <ag-grid-angular
+    style="width: 700px; height: 500px"
+    class="ag-theme-quartz"
+    [rowData]="rowData"
+    [gridOptions]="gridOptions"
+    [modules]="gridModules"
+  >
+  </ag-grid-angular>
+  <div style="margin-left: 1rem">
+    <div>
+      <h2 style="margin-top: 0">Bug Reproduction Steps:</h2>
+      <ol>
+        <li>Select a specific make from the "Make" column (i.e. Ford).</li>
+        <li>
+          Click the "Remove &lcub;make&rcub; From Data" button on the bottom of
+          the form.
+        </li>
+        <li>
+          Click in the filter to see that the option is no longer selected or
+          available, but table data is empty.
+        </li>
+        <li>
+          At this point the user would have to re-select a filter in order to
+          see data again.
+        </li>
+        <li>Click the "Show All Data" button.</li>
+        <li>
+          Click in the filter to see that all options are available again, but
+          "Ford" is not selected.
+        </li>
+        <li>
+          At this point the user would also have to re-select a filter in order
+          to see data again.
+        </li>
+      </ol>
+    </div>
+    <div>
+      <h2>Debug Filter Model Output (Tied to onFilterChanged Event):</h2>
+      <ol>
+        <li *ngFor="let output of debugOutput">{{ output }}</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div
+  style="
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+  "
+>
+  <button (click)="filterMake('Ford')">Remove Ford From Data</button>
+  <button (click)="filterMake('Porsche')">Remove Porsche From Data</button>
+  <button (click)="filterMake('Toyota')">Remove Toyota From Data</button>
+  <button (click)="filterMake(null)">Show All Data</button>
+</div>
+
+<div></div>
